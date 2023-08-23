@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <div class="container">
+            <div id="task-container">
+                <div id="head">
+                    <h1>To-Do List</h1>
+                    <img src="./images/icon.png">
+                </div>
+                <div class="row">
+                    <form action="/add-task" method="POST">
+                        <input type="text" name="task" placeholder="Add your task" required autocomplete="off">
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+                <div id="newTask">
+                    <ul>
+                        <% for(let i=0; i<to_do.length; i++) { %>
+                            <li class="checked">
+                                <div class="box">
+                                    <a href="/toggle-task/<%= i %>" class="toggle-task"><i class="fa-regular <%= to_do[i].checked ? 'fa-circle-check' : 'fa-circle' %>"></i></a>
+                                    <span class="task-text <%= to_do[i].checked ? 'completed' : '' %>"><%= to_do[i].task %></span>
+                                    <a href="/delete-task/<%= i %>" class="delete-task"><i class="fa-solid fa-xmark"></i></a>
+                                </div>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="/javascript/script.js"></script>
+    </body>
+</html>
